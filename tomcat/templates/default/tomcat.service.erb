@@ -1,0 +1,23 @@
+[Unit]
+Description=Apache Tomcat 8 Servlet Container
+After=syslog.target network.target
+
+[Service]
+User=tomcat
+Group=tomcat
+Type=forking
+Environment=TOMCAT_JAVA_HOME=/opt/java
+Environment=CATALINA_PID=/opt/tomcat8/tomcat.pid
+Environment=CATALINA_HOME=/opt/tomcat8
+Environment=CATALINA_BASE=/opt/tomcat8
+ExecStart=/opt/tomcat8/bin/startup.sh
+ExecStop=/opt/tomcat8/bin/shutdown.sh
+SuccessExitStatus=143
+Restart=on-failure
+Restart=always
+RestartSec=90
+StartLimitInterval=400
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target
